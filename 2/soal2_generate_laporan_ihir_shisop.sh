@@ -53,7 +53,7 @@ printf ("\nTipe segmen customer yang penjualannya paling sedikit adalah %s denga
 
 awk '
 BEGIN{FS="\t"}
-{if($13~"West" || $13~"East" ||$13~"South" || $13~"Center"){
+{if($13~"West" || $13~"East" ||$13~"South" || $13~"Central"){
 	kota[$13]+=$21}
 }
 END {
