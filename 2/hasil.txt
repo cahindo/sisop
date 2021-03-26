@@ -8,4 +8,4 @@ David Wiener
 
 Tipe segmen customer yang penjualannya paling sedikit adalah Corporate dengan transaksi 3020.
 
-Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah South dengan total keuntungan 46749.
+Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah Central dengan total keuntungan 39706.
