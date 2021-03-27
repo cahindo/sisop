@@ -1,0 +1,5 @@
+
+0 7 * * 1-5 pasword=$(date +%m%d%Y); zip -r -P $pasword koleksi.zip *; rm -r *-*
+
+
+0 18 * * 1-5 pasword=$(date +%m%d%Y); unzip -P pasword; koleksi.zip; rm -r *.zip
