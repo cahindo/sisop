@@ -44,7 +44,7 @@ for (segmen in iter) {
 		Min_Segmen=segmen
 		i++}
 	else if(iter[segmen] < Min_total){
-		Min_order=iter[segmen];
+		Min_total=iter[segmen];
 		Min_Segmen=segmen;}
 }
 printf ("\nTipe segmen customer yang penjualannya paling sedikit adalah %s dengan transaksi %d.\n",Min_Segmen,Min_total)}' Laporan-TokoShiSop.tsv >> hasil.txt
