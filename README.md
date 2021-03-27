@@ -1,5 +1,8 @@
 # LAPORAN PENJELASAN SOAL SHIFT MODUL 1
-
+## Anggota
+- Mohammad Faderik Izzul Haq (05111940000023)
+- Jonathan Timothy Siregar (05111940000120)
+- Abiya Sabitta Ragadani (05111940000166)
 ### SOAL 1
 
 ### SOAL 2
@@ -10,4 +13,13 @@ Untuk mencari nilai PP terbesar, pertama mendeklarasi nilai `Max_PP` menjadi 0 u
 Setelah semua sudah dibandingkan akan mencapai `END` dimana akan print `Transaksi terakhir dengan profit percentage terbesar yaitu MaxID dengan persentase Max_PP%.` dimana nanti akan dimasukan kedalam hasil.txt dengan `Laporan-TokoShiSop.tsv > hasil.txt`
 
 ##### Sub Soal B
+Pada sub soal ini Clemong meminta daftar Customer di Albuquerque pada tahun 2017. Karena itu perlu menyimpan daftar customer tersebut, dimana kita mencari kota Albuquerque dan Tahun 2017. Sehingga digunakan if dengan `if($10~"Albuquerque" && $2~"2017")` disini membandingkan argumen ke 10 dimana membandingkan list kota dengan string "Albuquerque" dan juga membandingkan argumen ke 2 dimana adanya tahun pada order id dengan string "2017" sehingga jika memiliki 2 hal tersebut akan disimpan customer namenya pada array.
+Setelah selesai dibandingkan semua akan mencapai  `END` dimana akan print daftar nama menggunakan looping for dengan `for (nama in trav)` yaitu nama yang sudah disimpan pada array dan memasukkannya ke dalam hasil.txt dengan `Laporan-TokoShiSop.tsv >> hasil.txt`. Menggunakan `>>` karena untuk menambahkan hasil sub soal B dibawah jawaban hasil sub soal A.
+
+##### Sub Soal C
+
+
+##### Sub Soal D
+
+
 ### SOAL 3
