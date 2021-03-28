@@ -43,6 +43,21 @@ grep -i "ERROR" $fLog | grep -oP "^(\S+\s){6}\K[^\[\(]+" | sort | uniq -c | sort
 ````
 Pertama kita membuat header "Error,Count" dan menyimpannya pada file output yang diminta. Selanjutnya kita mencari pesan error dan jumlah kemunculannya sesuai dengan Sub Soal B. Namun pada soal ini kita perlu mengurutkan hasilnya sesuai jumlah kemunculannya, maka kita lakukan `sort -nr` untuk mengurutkan angka dalam string. Untuk menyesuaikan bentuk output dengan format yang diminta, kita perlu membalik posisi pesan error dengan jumlah nya. Setelah semua perintah telah dijalankan, hasil output dari perintah tersebut dimasukkan pada file output dengan sistem append, sehingga header yang sebelumnya sudah kita buat tidak hilang.
 
+#### Sub Soal E
+Disini kita menampilkan semua informasi yang diperoleh pada Sub Soal C ke file user_statistic.csv urut berdasar username secara ascending.
+````Shell
+uname=$(grep -oP "\(\K[^\)]+" ${fLog} | sort | uniq | tr ' ' '\n')
+
+echo "Username,INFO,ERROR" > user_statistic.csv
+echo "$uname" | while read u
+do
+	echo "$u" | tr '\n' ','
+	grep "($u)" $fLog | grep -o " INFO " | wc -w | tr '\n' ','
+	grep "($u)" $fLog | grep -o " ERROR " | wc -w 
+done >> user_statistic.csv
+````
+echo pertama akan mencetak header "Username,INFO,ERROR". Selanjutnya seluruh hasil yang diperoleh pada Sub Soal D akan ditulis pada file output. Namun pada soal ini diminta untuk mengurutkan username secara ascending. Untuk mengakali hal tersebut, kita sudah melakukan sort pada hasil username yang kita dapat diawal program. `grep -oP "\(\K[^\)]+" ${fLog} | sort | uniq | tr ' ' '\n'`
+
 
 ### SOAL 2
 Pada soal nomer 2 digunakan file Laporan-TokoShiSop.tsv sebagai input dan hasil.txt sebagai output. Setiap awalan menggunakan `BEGIN {FS="\t"}` untuk membaca argumen tiap tab.
