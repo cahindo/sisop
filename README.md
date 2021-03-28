@@ -3,7 +3,46 @@
 - Mohammad Faderik Izzul Haq (05111940000023)
 - Jonathan Timothy Siregar (05111940000120)
 - Abiya Sabitta Ragadani (05111940000166)
+
 ### SOAL 1
+Pada soal ini kita diminta mengolah informasi dari file syslog.log yang berisi jenis log, pesan, dan username.
+#### Sub Soal A
+Sub soal ini meminta kita untuk membuat regex untuk mengekstrak informasi dari file syslog.log. disini saya menggunakan bantuan command `grep -oP`. flag -o berfungsi supaya grep hanya menampilkan kata yang sama dengan patternyang ditentukan, -P berarti menginterpretasikan patern dengan 'Perl-compatible  regular  expressions  (PCREs)' untuk dapat menggunakan pattern regex.
+
+1. Jenis log : `grep -oP "^(\S+\s){5}\K[^\ ]+" syslog.log`.
+Untuk menemukan jenis log disini digunakan pattern menggunakan regex untuk mencari kata dan spasi sebanyak 5 kali, lalu melupakan kata yang sudah ditemukan sebelumnya. Lalu grep mengambil semua karakter hingga bertemu spasi.
+
+2. Pesan log : `grep -oP "^(\S+\s){6}\K[^\[\(]+" syslog.log`.
+Pada pattern yang digunakan disini, pertama regex akan mencari kata dan spasi sebanyak 6 kali. Lalu perintah \K akan melupakan semua yang sudah ditemukan sebelumnya. Selanjutnya grep akan mengambil semua karakter hingga bertemu kakrakter '[' atau '('.
+
+3. Username : `grep -oP "\(\K[^\)]+" syslog.log`.
+Pada soal ini pattern yang menggunakan regex untuk mencari karakter '(' , setelah menemukan posisi karakter '(', \K akan melupakan semua karakter yang ditemukan. Lalu grep akan mengambil semua karakter hingga bertemu karakter ')'
+
+#### Sub Soal B
+Pada soal ini diminta untuk menampilkan semua pesan error beserta jumlah kemunculannya. Command yang yang digunakan adalah `grep -i "ERROR" $fLog | grep -oP "^(\S+\s){6}\K[^\[\(]+" | sort | uniq -c` disini grep akan mencari baris yang mengandung karakter "ERROR" lalu dari hasil yang diperoleh akan dilakukan grep lagi dengan pattern regex. Perintah regex disini sama dengan perintah pada sub soal A. Setelah memperoleh semua pesan error, dilakukan `sort | uniq -c` yang berfungsi untuk menghitung jumlah kemunculan pesan error yang unik. Sehingga pesan error yang sama tidak akan terhitung lebih dari sekali.
+
+#### Sub Soal C
+Soal ini meminta program untuk menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya. Disini kami menggunakan program sebagai berikut :
+````Shell
+uname=$(grep -oP "\(\K[^\)]+" ${fLog} | sort | uniq | tr ' ' '\n')
+
+echo "$uname" | while read u
+do
+echo "$u" | tr '\n' ','
+	grep "($u)" $fLog | grep -o " INFO " | wc -w | tr '\n' ','
+	grep "($u)" $fLog | grep -o " ERROR " | wc -w 
+done
+````
+Pertama kita mencari semua username yang terdapat pada file log dan menghapus username yang sama. Lalu kita memisahkan antar username dengan \n dan menyimpannya dalam variabel uname. Selanjutnya setiap baris dari variabel uname akan dibaca oleh perintah while dan disimpan sebagai `u`, dan setiap iterasi tersebut dilakukan grep dari file log untuk mencari baris yang mengandung username `u`, hasil dari perintah tersebut dilakukan perintah grep lagi untuk mencari karakter "INFO" dan menghitung jumlah kemunculannya dengan wc. Untuk mencari jumlah kemunculan karakter "ERROR" dilakukan hal yang sama hanya perlu mengganti "INFO" dengan "ERROR".
+
+#### Sub Soal D
+Pada soal ini kita diminta menyimpan hasil dari sub soal B pada file `error_message.csv` dengan header Error,Count. Hasil dari pesan error dan kemunculannya perlu diurutkan berdasarkan jumlah kemunculannya dari terbanyak hingga terkecil.
+````Shell
+echo "Error,Count" > error_message.csv
+grep -i "ERROR" $fLog | grep -oP "^(\S+\s){6}\K[^\[\(]+" | sort | uniq -c | sort -nr | while read a b; do echo "$b,$a";done >> error_message.csv
+````
+Pertama kita membuat header "Error,Count" dan menyimpannya pada file output yang diminta. Selanjutnya kita mencari pesan error dan jumlah kemunculannya sesuai dengan Sub Soal B. Namun pada soal ini kita perlu mengurutkan hasilnya sesuai jumlah kemunculannya, maka kita lakukan `sort -nr` untuk mengurutkan angka dalam string. Untuk menyesuaikan bentuk output dengan format yang diminta, kita perlu membalik posisi pesan error dengan jumlah nya. Setelah semua perintah telah dijalankan, hasil output dari perintah tersebut dimasukkan pada file output dengan sistem append, sehingga header yang sebelumnya sudah kita buat tidak hilang.
+
 
 ### SOAL 2
 Pada soal nomer 2 digunakan file Laporan-TokoShiSop.tsv sebagai input dan hasil.txt sebagai output. Setiap awalan menggunakan `BEGIN {FS="\t"}` untuk membaca argumen tiap tab.
