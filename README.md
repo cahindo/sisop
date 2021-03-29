@@ -135,3 +135,17 @@ printf("\nWilayah bagian (region) yang memiliki total keuntungan (profit) yang p
 ```
 
 ### SOAL 3
+
+#### Sub Soal A
+
+Pada Soal 3a, kita diminta untuk mengunduh 23 gambar dari https://loremflickr.com/320/240/kitten secara otomatis, dan menyimpannya ke dalam log `Foto.log`. 
+
+
+
+#### Sub Soal B
+
+#### Sub Soal C
+
+#### Sub Soal D
+
+#### Sub Soal E
