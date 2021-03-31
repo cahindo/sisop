@@ -166,13 +166,38 @@ if (( i < 10 ))
 
 #### Sub Soal B
 
-Soal 3B meminta untuk melakukan pengunduhan secara otomatis setiap 8 hari sekali dimulai dari tanggal 1, dan setiap 4 hari sekali dimulai dari tanggal 2.
+Soal 3B meminta untuk melakukan pengunduhan secara otomatis pada pukul 8 malam setiap 7 hari sekali dimulai dari tanggal 1, dan setiap 4 hari sekali dimulai dari tanggal 2.
+
 ```Tab
 0 20 1/7 * * bash 3b.sh
 
 0 20 2/4 * * bash 3b.sh
 ```
+Sementara untuk bash yang dijalankan, soal meminta untuk melakukan pengunduhan seperti pada soal 3a, dengan tambahan, setiap file yang diunduh akan dimasukkan ke dalam sebuah folder dengan nama direktori sesuai tanggal pengunduhan dengan format `dd-mm-yyyy`
 
+````Shell
+kol="Koleksi_"
+
+tanggal=$(date +%d-%m-%Y)
+
+mkdir $tanggal
+cd $tanggal
+
+i=1
+while [ $i -le 23 ]
+do
+  if (( i < 10 ))
+   then nF="${kol}0${i}"
+  elif (( i <= 23 && i >= 10 ))
+   then nF="${kol}${i}"
+  fi
+  
+wget -O "$nF" https://loremflickr.com/320/240/kitten -a Foto.log
+
+((i+=1))
+done
+
+````
 
 
 #### Sub Soal C
