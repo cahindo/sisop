@@ -138,11 +138,42 @@ printf("\nWilayah bagian (region) yang memiliki total keuntungan (profit) yang p
 
 #### Sub Soal A
 
-Pada Soal 3a, kita diminta untuk mengunduh 23 gambar dari https://loremflickr.com/320/240/kitten secara otomatis, dan menyimpannya ke dalam log `Foto.log`. 
+Soal 3a meminta untuk mengunduh 23 gambar dari https://loremflickr.com/320/240/kitten secara otomatis. Oleh karena itu digunakan loop `while` untuk menyimpannya ke dalam log `Foto.log`. 
+```Shell
 
+i=1
+while [ $i -le 23 ]
+do
+   
+wget -O "$nF" https://loremflickr.com/320/240/kitten -a Foto.log
 
+((i+=1))
+done
+```
+
+Akan tetapi, kita juga diminta untuk memberikan nama 'Koleksi_XX' untuk masing-masing file gambar yang telah diunduh. Oleh karena itu, perlu ditambahkan kondisional `if` di dalam loop `while`.
+
+```Shell
+
+kol="Koleksi_"
+
+if (( i < 10 ))
+   then nF="${kol}0${i}"
+  elif (( i <= 23 && i >= 10 ))
+   then nF="${kol}${i}"
+  fi
+  ```
 
 #### Sub Soal B
+
+Soal 3B meminta untuk melakukan pengunduhan secara otomatis setiap 8 hari sekali dimulai dari tanggal 1, dan setiap 4 hari sekali dimulai dari tanggal 2.
+```Tab
+0 20 1/7 * * bash 3b.sh
+
+0 20 2/4 * * bash 3b.sh
+```
+
+
 
 #### Sub Soal C
 
