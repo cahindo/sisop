@@ -217,4 +217,14 @@ rm -r *-*
 
 #### Sub Soal E
 
+sub Soal E meminta untuk melakukan archiving dengan zip yang sama dengan sub soal d pada pukul 7 pagi setiap senin-jumat dan melakukan unzip di setiap pukul 6 sore dari hari senin-jumat
+
+```
+Tab
+0 7 * * 1-5 pasword=$(date +%m%d%Y); zip -r -P $pasword koleksi.zip *; rm -r *-*
+
+
+0 18 * * 1-5 pasword=$(date +%m%d%Y); unzip -P pasword; koleksi.zip; rm -r *.zip
+```
+
 
