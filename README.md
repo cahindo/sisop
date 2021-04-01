@@ -199,9 +199,22 @@ done
 
 ````
 
-
 #### Sub Soal C
 
 #### Sub Soal D
 
+sub Soal D meminta untuk melakukan archiving untuk seluruh folder yang ada ke bentu zip dengan nama Koleksi.zip dan password tanggal saat itu menggunakan format mmddyyyy. Oleh karena itu digunakan zip -r agar melakukan zip kepada direktori yang diinginkan secara sekursif serta zip -P untuk menambahkan password. Kemudian folder dengan nama sesuai tanggal dihapus. Untuk itu digunakan `rm -r *-*` untuk me_remove_ seluruh direktori yang mengandung garis hubung.
+
+````
+Shell
+
+pasword=$(date +%m%d%Y)
+
+zip -r -P $pasword Koleksi.zip *
+
+rm -r *-*
+````
+
 #### Sub Soal E
+
+
