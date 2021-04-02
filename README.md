@@ -104,9 +104,9 @@ for (segmen in iter) {
 	if(awal==0){
 		Min_total=iter[segmen];
 		Min_Segmen=segmen
-		i++}
+		awal++}
 	else if(iter[segmen] < Min_total){
-		Min_order=iter[segmen];
+		Min_total=iter[segmen];
 		Min_Segmen=segmen;}
 ```
 Setelah itu akan print hasilnya dengan memasukan hasil ke dalam hasil.txt dengan `Laporan-TokoShiSop.tsv >> hasil.txt`.
