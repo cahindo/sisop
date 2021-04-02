@@ -5,9 +5,25 @@
 - Abiya Sabitta Ragadani (05111940000166)
 
 ### SOAL 1
+<p align="center">
+	<img src="1pre.png" width="500">
+	<br>
+	Gambaran program dan struktur folder SEBELUM dijalankan
+	<br>
+</p>
+<p align="center">
+	<img src="1post.png" width="500">
+	<br>
+	Gambaran program dan struktur folder SETELAH dijalankan
+	<br>
+</p>
+
+#### Kendala yang dihadapi
+Ketika pengerjaan soal nomer 1 ini, kami belum pernah mengerjakan regex sebelumnya. Jadi diperlukan adaptasi yang cukup memakan waktu untuk memahami regex.
+
 Pada soal ini kita diminta mengolah informasi dari file syslog.log yang berisi jenis log, pesan, dan username.
 #### Sub Soal A
-Sub soal ini meminta kita untuk membuat regex untuk mengekstrak informasi dari file syslog.log. disini saya menggunakan bantuan command `grep -oP`. flag -o berfungsi supaya grep hanya menampilkan kata yang sama dengan patternyang ditentukan, -P berarti menginterpretasikan patern dengan 'Perl-compatible  regular  expressions  (PCREs)' untuk dapat menggunakan pattern regex.
+Sub soal ini meminta kita untuk membuat regex untuk mengekstrak informasi dari file syslog.log. disini kami menggunakan bantuan command `grep -oP`. flag -o berfungsi supaya grep hanya menampilkan kata yang sama dengan patternyang ditentukan, -P berarti menginterpretasikan patern dengan 'Perl-compatible  regular  expressions  (PCREs)' untuk dapat menggunakan pattern regex.
 
 1. Jenis log : `grep -oP "^(\S+\s){5}\K[^\ ]+" syslog.log`.
 Untuk menemukan jenis log disini digunakan pattern menggunakan regex untuk mencari kata dan spasi sebanyak 5 kali, lalu melupakan kata yang sudah ditemukan sebelumnya. Lalu grep mengambil semua karakter hingga bertemu spasi.
