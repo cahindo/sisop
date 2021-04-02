@@ -19,10 +19,9 @@
 </p>
 
 #### Kendala yang dihadapi
-Ketika pengerjaan soal nomer 1 ini, kami belum pernah mengerjakan regex sebelumnya. Jadi diperlukan adaptasi yang cukup memakan waktu untuk memahami regex.
+Ketika pengerjaan soal nomer 1 ini, kami belum pernah mengerjakan regex sebelumnya. Jadi diperlukan adaptasi yang cukup memakan waktu untuk memahami regex. Selain itu ada kesalah pahaman bahwa sub soal B dan C yang seharusnya ditampilkan  ke terminal, kami anggap hanya perlu ditampilkan di file output.
 
-Pada soal ini kita diminta mengolah informasi dari file syslog.log yang berisi jenis log, pesan, dan username.
-#### Sub Soal A
+#### PenejSub Soal A
 Sub soal ini meminta kita untuk membuat regex untuk mengekstrak informasi dari file syslog.log. disini kami menggunakan bantuan command `grep -oP`. flag -o berfungsi supaya grep hanya menampilkan kata yang sama dengan patternyang ditentukan, -P berarti menginterpretasikan patern dengan 'Perl-compatible  regular  expressions  (PCREs)' untuk dapat menggunakan pattern regex.
 
 1. Jenis log : `grep -oP "^(\S+\s){5}\K[^\ ]+" syslog.log`.
