@@ -99,6 +99,13 @@ Pada soal 2 sempat terjadi error pada sub soal a karena adanya division by zero.
 ### Penjelasan Soal 2
 Pada soal nomer 2 digunakan file Laporan-TokoShiSop.tsv sebagai input dan hasil.txt sebagai output. Setiap awalan menggunakan `BEGIN {FS="\t"}` untuk membaca argumen tiap tab.
 ##### Sub Soal A
+<p align="center">
+	<img src="2a.png" width="500">
+	<br>
+	Code pada sub soal a
+	<br>
+</p>
+
 Pada sub soal ini diminta untuk mencari nilai Profit Percentage terbesar dengan Row IDnya. Nilai Profit Percentage didapatkan dari (Profit / Cost) * 100. Dimana cost adalah Sales dikurangi dengan profit sehingga bisa didapatkan rumus PP = (Profit / (Sales - Profit)) * 100. Sehingga jika ditulis didalam awk menjadi `PP=($21/($18-$21))*100` Karena profit adalah argumen ke 21 dan sales adalah argumen ke 18.
 Untuk mencari nilai PP terbesar, pertama mendeklarasi nilai `Max_PP` menjadi 0 untuk menyimpan nilai maksimum. Kemudian untuk tiap baris dicari nilai PPnya terlebih dahulu dengan `PP=($21/($18-$21))*100` kemudian dibandingkan dengan nilai `Max_PP` jika lebih besar sama dengan nilai PP maka nilai `Max_PP` akan tergantikan dan akan menyimpan nilai Row IDnya juga dengan `MaxID=$1` karena nilai Row ID adalah argumen pertama.
 ```Shell
@@ -113,6 +120,13 @@ END {printf ("Transaksi terakhir dengan profit percentage terbesar yaitu %d deng
 ```
 
 ##### Sub Soal B
+<p align="center">
+	<img src="2b.png" width="500">
+	<br>
+	Code pada sub soal a
+	<br>
+</p>
+
 Pada sub soal ini Clemong meminta daftar Customer di Albuquerque pada tahun 2017. Karena itu perlu menyimpan daftar customer tersebut, dimana kita mencari kota Albuquerque dan Tahun 2017. Sehingga digunakan if dengan `if($10~"Albuquerque" && $2~"2017")` disini membandingkan argumen ke 10 dimana membandingkan list kota dengan string "Albuquerque" dan juga membandingkan argumen ke 2 dimana adanya tahun pada order id dengan string "2017" sehingga jika memiliki 2 hal tersebut akan disimpan customer namenya pada array.4
 ```Shell
 if($10~"Albuquerque" && $2~"2017"){
@@ -127,6 +141,13 @@ for (nama in trav) {
 ```
 
 ##### Sub Soal C
+<p align="center">
+	<img src="2c.png" width="500">
+	<br>
+	Code pada sub soal a
+	<br>
+</p>
+
 Untuk soal C, mencari nilai segment customer dengan jumlah transaksi paling sedikit. Karena itu menggunakan if untuk menyimpan tiap segment customer ke dalam array. Segment Customer merupakan argumen ke 8 didalam file.
 ```Shell
 if($8~"Home Office" || $8~"Customer" || $8~"Corporate"){
@@ -152,6 +173,13 @@ printf ("\nTipe segmen customer yang penjualannya paling sedikit adalah %s denga
 ```
 
 ##### Sub Soal D
+<p align="center">
+	<img src="2d.png" width="500">
+	<br>
+	Code pada sub soal a
+	<br>
+</p>
+
 Soal D diminta untuk mencari region yang total keuntungannya paling sedikit. Sehingga sama seperti soal C disimpan terlebih dahulu tiap region ke dalam array untuk tiap regionnya dimana region adalah argumen ke 13 dan menjumlahkan profit di region tersebut.
 ```Shell
 if($13~"West" || $13~"East" ||$13~"South" || $13~"Central"){
