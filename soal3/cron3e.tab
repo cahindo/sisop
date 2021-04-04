@@ -1,5 +1,4 @@
+0 7 * * 1-5 bash /home/jogar/Documents/praktikum1/soal3d.sh
 
-0 7 * * 1-5 bash soal3d.sh
 
-
-0 18 * * 1-5 bash soal3d.sh
+0 18 * * 1-5 bash /home/jogar/Documents/praktikum1/soal3d.sh
