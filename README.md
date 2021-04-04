@@ -353,7 +353,7 @@ done
 
 #### Sub Soal C
 
-sub Soal C meminta untuk melakukan pengunduhan antara gambar kucing dan kelinci secara bergantian setiap harinya. Apabila hari ini ke-23 gambar kelinci telah terunduh, maka esok harinya yang diunduh merupakan gambar kucing. Berlaku sebaliknya. Begitu seterusnya.
+sub Soal C meminta untuk melakukan pengunduhan antara gambar kucing dan kelinci secara bergantian setiap harinya. Apabila hari ini ke-23 gambar kelinci telah terunduh, maka esok harinya yang diunduh merupakan gambar kucing. Berlaku sebaliknya. Begitu seterusnya. Sub-soal ini juga meminta melakukan penggantian nama direktori sesuai dengan gambar yang diunduh beserta tanggal pengunduhan.
 
 ```
 Shell
@@ -374,6 +374,55 @@ mkdir "/home/jogar/Documents/praktikum1/$dirName"
 cd "/home/jogar/Documents/praktikum1/$dirName"
 
 PWD="/home/jogar/Documents/praktikum1/$dirName"
+```
+
+Sementara kode berikutnya, sama dengan 3a, yang mencakup pengunduhan, pengecekan kesamaan, penghapusan, dan penamaan ulang.
+
+```
+Shell
+i=1
+nF=1
+while [ $i -le 23 ]
+  do
+  
+  wget -O "$PWD/$nF.jpg" https://loremflickr.com/320/240/kitten -a "$PWD/Foto.log"
+
+  AWK=($(awk '/https:\/\/loremflickr.com\/cache\/resized\// {print $3}' "$PWD/Foto.log"))
+
+  j=0
+  beda=0
+
+  while [ $j -lt $(($i-1)) ]
+    do
+      if [ "${AWK[j]}" == "${AWK[$(($i-1))]}" ]
+	then
+          beda=1
+      fi
+
+      if [ $beda -eq 1 ]
+	then
+          rm "$PWD/$nF.jpg"
+	  nF=$nF-1
+	  break
+      fi
+
+  ((j+=1))
+  done
+	
+  if [[ -f "$PWD/$nF.jpg" ]]
+    then
+      if [ $nF -le 9 ]
+	then
+	  mv "$PWD/$nF.jpg" "$PWD/Koleksi_0$nF.jpg"
+	else
+	  mv "$PWD/$nF.jpg" "$PWD/Koleksi_$nF.jpg"
+
+      fi
+  fi
+
+  ((i+=1))
+  ((nF+=1))
+done
 ```
 
 <p align="center">
@@ -418,7 +467,7 @@ Tab
 0 18 * * 1-5 bash /home/jogar/Documents/praktikum1/soal3d.sh
 ```
 
-#####Kendala yang dihadapi
+####Kendala yang dihadapi
 
 Pada awalnya tidak terdapat pengecekan kesamaan di soal 3a dikarenakan kurang memahami AWK. Kemudian di soal 3B tidak menggunakan `,` sebagai pemisah antar crontab yang memiliki pola serupa. Pada soal 3c, terdapat kendala di keseluruhan sub-soal akibat tidak mengerti mengenai maksud dan implementasi soal. Di keseluruhan sub Soal nomor 3, belum menggunakan perintah dengan alamat direktori yang spesifik.
 
