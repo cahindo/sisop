@@ -467,7 +467,7 @@ Tab
 0 18 * * 1-5 bash /home/jogar/Documents/praktikum1/soal3d.sh
 ```
 
-####Kendala yang dihadapi
+#### Kendala yang dihadapi
 
 Pada awalnya tidak terdapat pengecekan kesamaan di soal 3a dikarenakan kurang memahami AWK. Kemudian di soal 3B tidak menggunakan `,` sebagai pemisah antar crontab yang memiliki pola serupa. Pada soal 3c, terdapat kendala di keseluruhan sub-soal akibat tidak mengerti mengenai maksud dan implementasi soal. Di keseluruhan sub Soal nomor 3, belum menggunakan perintah dengan alamat direktori yang spesifik.
 
