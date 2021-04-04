@@ -218,7 +218,7 @@ while [ $i -le 23 ]
 Setelah itu, dilakukan pengecekan kesamaan gambar, yang diambil dari partisi ke-3 dari setiap log dalam `Foto.log`. Untuk itu kita menggunakan AWK untuk memeriksanya secara otomatis. File yang diduga memiliki kesamaan akan mengubah variabel `$beda` dari 0 menjadi 1. Apabila variabel tersebut mengembalikan nilai 1, maka file pada loop itu akan dihapus, dan penomoran file `$nF` akan dimundurkan.
 
 ```
-Shell
+
 
   AWK=($(awk '/https:\/\/loremflickr.com\/cache\/resized\// {print $3}' "$PWD/Foto.log"))
 
@@ -246,7 +246,7 @@ Shell
   Setelah didapatkan file yang benar-benar identik, barulah dilakukan penamaan ulang file, dimulai dari `Koleksi_01` sampai ke file identik yang terakhir. Untuk melakukannya, perlu dilakukan pengecekan kembali akan eksistensi file yang pada awalnya diberi nama sesuai iterasi yang berlangsung. Apabila file ditemukan, barulah penamaan dilanjutkan. Penamaan ini dibagi atas 2 bagian, penamaan dari 1-9 menggunakan `Koleksi_0$i` dan sisanya menggunakan `Koleksi_$i`
 
 ```
-Shell
+
  if [[ -f "$PWD/$nF.jpg" ]]
     then
       if [ $nF -le 9 ]
@@ -280,13 +280,13 @@ done
 
 Soal 3B meminta untuk melakukan pengunduhan secara otomatis pada pukul 8 malam setiap 7 hari sekali dimulai dari tanggal 1, dan setiap 4 hari sekali dimulai dari tanggal 2.
 
-```Tab
+```
 0 20 1/7,2/4 * * bash /home/jogar/Documents/praktikum1/soal3b.sh
 
 ```
 Sementara untuk bash yang dijalankan, soal meminta untuk melakukan pengunduhan seperti pada soal 3a, dengan tambahan, setiap file yang diunduh akan dimasukkan ke dalam sebuah folder dengan nama direktori sesuai tanggal pengunduhan dengan format `dd-mm-yyyy`
 
-````Shell
+````
 tanggal=$(date +%d-%m-%Y)
 
 mkdir /home/jogar/Documents/praktikum1/$tanggal
@@ -298,7 +298,7 @@ PWD="/home/jogar/Documents/praktikum1/$tanggal"
 Sementara kode berikutnya, sama dengan 3a, yang mencakup pengunduhan, pengecekan kesamaan, penghapusan, dan penamaan ulang.
 
 ```
-Shell
+
 i=1
 nF=1
 while [ $i -le 23 ]
@@ -356,7 +356,7 @@ done
 sub Soal C meminta untuk melakukan pengunduhan antara gambar kucing dan kelinci secara bergantian setiap harinya. Apabila hari ini ke-23 gambar kelinci telah terunduh, maka esok harinya yang diunduh merupakan gambar kucing. Berlaku sebaliknya. Begitu seterusnya. Sub-soal ini juga meminta melakukan penggantian nama direktori sesuai dengan gambar yang diunduh beserta tanggal pengunduhan.
 
 ```
-Shell
+
 
 tanggal=$(date +'%d-%m-%Y')
 kemarin=$(date -d "yesterday" +'%d-%m-%Y')
@@ -379,7 +379,7 @@ PWD="/home/jogar/Documents/praktikum1/$dirName"
 Sementara kode berikutnya, sama dengan 3a, yang mencakup pengunduhan, pengecekan kesamaan, penghapusan, dan penamaan ulang.
 
 ```
-Shell
+
 i=1
 nF=1
 while [ $i -le 23 ]
@@ -460,7 +460,6 @@ rm -r "$PWD/*-*"
 sub Soal E meminta untuk melakukan archiving dengan zip yang sama dengan sub soal d pada pukul 7 pagi setiap senin-jumat dan melakukan unzip di setiap pukul 6 sore dari hari senin-jumat
 
 ```
-Tab
 0 7 * * 1-5 bash /home/jogar/Documents/praktikum1/soal3d.sh
 
 
