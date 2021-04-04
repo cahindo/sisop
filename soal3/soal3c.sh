@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd $(dirname $0)
-
 tanggal=$(date +'%d-%m-%Y')
 kemarin=$(date -d "yesterday" +'%d-%m-%Y')
 
