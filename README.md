@@ -93,6 +93,7 @@ echo pertama akan mencetak header "Username,INFO,ERROR". Selanjutnya seluruh has
 	Isi Hasil.txt
 	<br>
 </p>
+
 ##### Kendala yang dihadapi
 Pada soal 2 sempat terjadi error pada sub soal a karena adanya division by zero. Namun setelah ditambahkan `if(NR > 1)` error tersebut sudah tidak muncul lagi dan program sudah bisa dijalani. Selain itu masih adaptasi dengan bahasa shell dan awk.
 ### Penjelasan Soal 2
