@@ -12,17 +12,19 @@ else
     link="kitten"
 fi
 
-mkdir $dirName
-cd $dirName
+mkdir "/home/jogar/Documents/praktikum1/$dirName"
+cd "/home/jogar/Documents/praktikum1/$dirName"
+
+PWD="/home/jogar/Documents/praktikum1/$dirName"
 
 i=1
 nF=1
 while [ $i -le 23 ]
   do
   
-  wget -O "$nF.jpg" https://loremflickr.com/320/240/$link -a Foto.log
+  wget -O "$PWD/$nF.jpg" https://loremflickr.com/320/240/$link -a "$PWD/Foto.log"
 
-  AWK=($(awk '/https:\/\/loremflickr.com\/cache\/resized\// {print $3}' ./Foto.log))
+  AWK=($(awk '/https:\/\/loremflickr.com\/cache\/resized\// {print $3}' "$PWD/Foto.log"))
 
   j=0
   beda=0
@@ -36,7 +38,7 @@ while [ $i -le 23 ]
 
       if [ $beda -eq 1 ]
 	then
-          rm "$nF.jpg"
+          rm "$PWD/$nF.jpg"
 	  nF=$nF-1
 	  break
       fi
@@ -44,13 +46,13 @@ while [ $i -le 23 ]
   ((j+=1))
   done
 	
-  if [[ -f "$nF.jpg" ]]
+  if [[ -f "$PWD/$nF.jpg" ]]
     then
       if [ $nF -le 9 ]
 	then
-	  mv "$nF.jpg" "Koleksi_0$nF.jpg"
+	  mv "$PWD/$nF.jpg" "$PWD/Koleksi_0$nF.jpg"
 	else
-	  mv "$nF.jpg" "Koleksi_$nF.jpg"
+	  mv "$PWD/$nF.jpg" "$PWD/Koleksi_$nF.jpg"
 
       fi
   fi
