@@ -263,6 +263,18 @@ Shell
 done
 ```
 
+<p align="center">
+	<img src="3a.png" width="500">
+	<br>
+	Direktori setelah pengunduhan 23 foto yang identik
+	<br>
+</p>
+<p align="center">
+	<img src="3Fotolog.png" width="500">
+	<br>
+	isi dari Foto.log
+	<br>
+</p>
 
 #### Sub Soal B
 
@@ -332,6 +344,12 @@ while [ $i -le 23 ]
 done
 ```
 
+<p align="center">
+	<img src="3b.png" width="500">
+	<br>
+	Direktori dengan nama yang telah disesuaikan, beserta isinya
+	<br>
+</p>
 
 #### Sub Soal C
 
@@ -358,6 +376,12 @@ cd "/home/jogar/Documents/praktikum1/$dirName"
 PWD="/home/jogar/Documents/praktikum1/$dirName"
 ```
 
+<p align="center">
+	<img src="3c.png" width="500">
+	<br>
+	Direktori dengan nama dan isi yang telah disesuaikan
+	<br>
+</p>
 
 
 #### Sub Soal D
@@ -374,6 +398,13 @@ zip -r -P $pasword "$PWD/Koleksi.zip" *
 rm -r "$PWD/*-*"
 
 ````
+
+<p align="center">
+	<img src="3d.png" width="500">
+	<br>
+	Hasil zip yang telah diproteksi
+	<br>
+</p>
 
 #### Sub Soal E
 
