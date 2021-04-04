@@ -75,6 +75,27 @@ echo pertama akan mencetak header "Username,INFO,ERROR". Selanjutnya seluruh has
 
 
 ### SOAL 2
+<p align="center">
+	<img src="2pre.png" width="500">
+	<br>
+	Struktur folder SEBELUM dijalankan
+	<br>
+</p>
+<p align="center">
+	<img src="2post.png" width="500">
+	<br>
+	Struktur folder SETELAH dijalankan
+	<br>
+</p>
+<p align="center">
+	<img src="2hasil.png" width="500">
+	<br>
+	Isi Hasil.txt
+	<br>
+</p>
+##### Kendala yang dihadapi
+Pada soal 2 sempat terjadi error pada sub soal a karena adanya division by zero. Namun setelah ditambahkan `if(NR > 1)` error tersebut sudah tidak muncul lagi dan program sudah bisa dijalani. Selain itu masih adaptasi dengan bahasa shell dan awk.
+### Penjelasan Soal 2
 Pada soal nomer 2 digunakan file Laporan-TokoShiSop.tsv sebagai input dan hasil.txt sebagai output. Setiap awalan menggunakan `BEGIN {FS="\t"}` untuk membaca argumen tiap tab.
 ##### Sub Soal A
 Pada sub soal ini diminta untuk mencari nilai Profit Percentage terbesar dengan Row IDnya. Nilai Profit Percentage didapatkan dari (Profit / Cost) * 100. Dimana cost adalah Sales dikurangi dengan profit sehingga bisa didapatkan rumus PP = (Profit / (Sales - Profit)) * 100. Sehingga jika ditulis didalam awk menjadi `PP=($21/($18-$21))*100` Karena profit adalah argumen ke 21 dan sales adalah argumen ke 18.
