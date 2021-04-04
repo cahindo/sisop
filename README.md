@@ -205,79 +205,174 @@ printf("\nWilayah bagian (region) yang memiliki total keuntungan (profit) yang p
 
 Soal 3a meminta untuk mengunduh 23 gambar dari https://loremflickr.com/320/240/kitten secara otomatis. Oleh karena itu digunakan loop `while` untuk menyimpannya ke dalam log `Foto.log`. 
 ```Shell
+PWD="/home/jogar/Documents/praktikum1"
 
 i=1
+nF=1
 while [ $i -le 23 ]
-do
-   
-wget -O "$nF" https://loremflickr.com/320/240/kitten -a Foto.log
+  do
+  
+  wget -O "$PWD/$nF.jpg" https://loremflickr.com/320/240/kitten -a "$PWD/Foto.log"
+```
 
-((i+=1))
+Setelah itu, dilakukan pengecekan kesamaan gambar, yang diambil dari partisi ke-3 dari setiap log dalam `Foto.log`. Untuk itu kita menggunakan AWK untuk memeriksanya secara otomatis. File yang diduga memiliki kesamaan akan mengubah variabel `$beda` dari 0 menjadi 1. Apabila variabel tersebut mengembalikan nilai 1, maka file pada loop itu akan dihapus, dan penomoran file `$nF` akan dimundurkan.
+
+```
+Shell
+
+  AWK=($(awk '/https:\/\/loremflickr.com\/cache\/resized\// {print $3}' "$PWD/Foto.log"))
+
+  j=0
+  beda=0
+
+  while [ $j -lt $(($i-1)) ]
+    do
+      if [ "${AWK[j]}" == "${AWK[$(($i-1))]}" ]
+	then
+          beda=1
+      fi
+
+      if [ $beda -eq 1 ]
+	then
+          rm "$PWD/$nF.jpg"
+	  nF=$nF-1
+	  break
+      fi
+
+  ((j+=1))
+  done
+  ```
+  
+  Setelah didapatkan file yang benar-benar identik, barulah dilakukan penamaan ulang file, dimulai dari `Koleksi_01` sampai ke file identik yang terakhir. Untuk melakukannya, perlu dilakukan pengecekan kembali akan eksistensi file yang pada awalnya diberi nama sesuai iterasi yang berlangsung. Apabila file ditemukan, barulah penamaan dilanjutkan. Penamaan ini dibagi atas 2 bagian, penamaan dari 1-9 menggunakan `Koleksi_0$i` dan sisanya menggunakan `Koleksi_$i`
+
+```
+Shell
+ if [[ -f "$PWD/$nF.jpg" ]]
+    then
+      if [ $nF -le 9 ]
+	then
+	  mv "$PWD/$nF.jpg" "$PWD/Koleksi_0$nF.jpg"
+	else
+	  mv "$PWD/$nF.jpg" "$PWD/Koleksi_$nF.jpg"
+
+      fi
+  fi
+
+  ((i+=1))
+  ((nF+=1))
 done
 ```
 
-Akan tetapi, kita juga diminta untuk memberikan nama 'Koleksi_XX' untuk masing-masing file gambar yang telah diunduh. Oleh karena itu, perlu ditambahkan kondisional `if` di dalam loop `while`.
-
-```Shell
-
-kol="Koleksi_"
-
-if (( i < 10 ))
-   then nF="${kol}0${i}"
-  elif (( i <= 23 && i >= 10 ))
-   then nF="${kol}${i}"
-  fi
-  ```
 
 #### Sub Soal B
 
 Soal 3B meminta untuk melakukan pengunduhan secara otomatis pada pukul 8 malam setiap 7 hari sekali dimulai dari tanggal 1, dan setiap 4 hari sekali dimulai dari tanggal 2.
 
 ```Tab
-0 20 1/7 * * bash 3b.sh
+0 20 1/7,2/4 * * bash /home/jogar/Documents/praktikum1/soal3b.sh
 
-0 20 2/4 * * bash 3b.sh
 ```
 Sementara untuk bash yang dijalankan, soal meminta untuk melakukan pengunduhan seperti pada soal 3a, dengan tambahan, setiap file yang diunduh akan dimasukkan ke dalam sebuah folder dengan nama direktori sesuai tanggal pengunduhan dengan format `dd-mm-yyyy`
 
 ````Shell
-kol="Koleksi_"
-
 tanggal=$(date +%d-%m-%Y)
 
-mkdir $tanggal
-cd $tanggal
+mkdir /home/jogar/Documents/praktikum1/$tanggal
+cd /home/jogar/Documents/praktikum1/$tanggal
 
-i=1
-while [ $i -le 23 ]
-do
-  if (( i < 10 ))
-   then nF="${kol}0${i}"
-  elif (( i <= 23 && i >= 10 ))
-   then nF="${kol}${i}"
-  fi
-  
-wget -O "$nF" https://loremflickr.com/320/240/kitten -a Foto.log
-
-((i+=1))
-done
-
+PWD="/home/jogar/Documents/praktikum1/$tanggal"
 ````
 
+Sementara kode berikutnya, sama dengan 3a, yang mencakup pengunduhan, pengecekan kesamaan, penghapusan, dan penamaan ulang.
+
+```
+Shell
+i=1
+nF=1
+while [ $i -le 23 ]
+  do
+  
+  wget -O "$PWD/$nF.jpg" https://loremflickr.com/320/240/kitten -a "$PWD/Foto.log"
+
+  AWK=($(awk '/https:\/\/loremflickr.com\/cache\/resized\// {print $3}' "$PWD/Foto.log"))
+
+  j=0
+  beda=0
+
+  while [ $j -lt $(($i-1)) ]
+    do
+      if [ "${AWK[j]}" == "${AWK[$(($i-1))]}" ]
+	then
+          beda=1
+      fi
+
+      if [ $beda -eq 1 ]
+	then
+          rm "$PWD/$nF.jpg"
+	  nF=$nF-1
+	  break
+      fi
+
+  ((j+=1))
+  done
+	
+  if [[ -f "$PWD/$nF.jpg" ]]
+    then
+      if [ $nF -le 9 ]
+	then
+	  mv "$PWD/$nF.jpg" "$PWD/Koleksi_0$nF.jpg"
+	else
+	  mv "$PWD/$nF.jpg" "$PWD/Koleksi_$nF.jpg"
+
+      fi
+  fi
+
+  ((i+=1))
+  ((nF+=1))
+done
+```
+
+
 #### Sub Soal C
+
+sub Soal C meminta untuk melakukan pengunduhan antara gambar kucing dan kelinci secara bergantian setiap harinya. Apabila hari ini ke-23 gambar kelinci telah terunduh, maka esok harinya yang diunduh merupakan gambar kucing. Berlaku sebaliknya. Begitu seterusnya.
+
+```
+Shell
+
+tanggal=$(date +'%d-%m-%Y')
+kemarin=$(date -d "yesterday" +'%d-%m-%Y')
+
+if [[ -d "Kucing_$kemarin" ]]
+then
+    dirName="Kelinci_$tanggal"
+    link="bunny"
+else
+    dirName="Kucing_$tanggal"
+    link="kitten"
+fi
+
+mkdir "/home/jogar/Documents/praktikum1/$dirName"
+cd "/home/jogar/Documents/praktikum1/$dirName"
+
+PWD="/home/jogar/Documents/praktikum1/$dirName"
+```
+
+
 
 #### Sub Soal D
 
 sub Soal D meminta untuk melakukan archiving untuk seluruh folder yang ada ke bentu zip dengan nama Koleksi.zip dan password tanggal saat itu menggunakan format mmddyyyy. Oleh karena itu digunakan zip -r agar melakukan zip kepada direktori yang diinginkan secara sekursif serta zip -P untuk menambahkan password. Kemudian folder dengan nama sesuai tanggal dihapus. Untuk itu digunakan `rm -r *-*` untuk me_remove_ seluruh direktori yang mengandung garis hubung.
 
 ````
-Shell
+PWD="/home/jogar/Documents/praktikum1"
 
 pasword=$(date +%m%d%Y)
 
-zip -r -P $pasword Koleksi.zip *
+zip -r -P $pasword "$PWD/Koleksi.zip" *
 
-rm -r *-*
+rm -r "$PWD/*-*"
+
 ````
 
 #### Sub Soal E
@@ -286,10 +381,10 @@ sub Soal E meminta untuk melakukan archiving dengan zip yang sama dengan sub soa
 
 ```
 Tab
-0 7 * * 1-5 pasword=$(date +%m%d%Y); zip -r -P $pasword koleksi.zip *; rm -r *-*
+0 7 * * 1-5 bash /home/jogar/Documents/praktikum1/soal3d.sh
 
 
-0 18 * * 1-5 pasword=$(date +%m%d%Y); unzip -P pasword; koleksi.zip; rm -r *.zip
+0 18 * * 1-5 bash /home/jogar/Documents/praktikum1/soal3d.sh
 ```
 
 
