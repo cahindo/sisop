@@ -42,7 +42,7 @@ for (segmen in iter) {
 	if(awal==0){
 		Min_total=iter[segmen];
 		Min_Segmen=segmen
-		i++}
+		awal++}
 	else if(iter[segmen] < Min_total){
 		Min_total=iter[segmen];
 		Min_Segmen=segmen;}
